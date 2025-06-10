@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 /**
  * @OA\Tag(
  *     name="Bookings",
- *     description="API Endpoints for managing bookings"
+ *     description="API Endpoint for adding bookings"
  * )
  */
 class BookingController extends Controller
