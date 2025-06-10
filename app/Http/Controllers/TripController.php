@@ -92,4 +92,43 @@ class TripController extends Controller
     {
         //
     }
+
+    /**
+     * Display the trips overview page with booking statistics.
+     */
+    public function trips()
+    {
+        $trips = Trip::with(['bookings' => function ($query) {
+            $query->select('trip_id', 'status', 'number_of_people');
+        }])
+            ->orderBy('start_date', 'asc')
+            ->get()
+            ->map(function ($trip) {
+                $confirmedBookings = $trip->bookings->where('status', 'confirmed')->count();
+                $pendingBookings = $trip->bookings->where('status', 'pending')->count();
+                $canceledBookings = $trip->bookings->where('status', 'canceled')->count();
+
+                $totalRevenue = $trip->bookings
+                    ->where('status', 'confirmed')
+                    ->sum(function ($booking) use ($trip) {
+                        return $booking->number_of_people * $trip->price_per_person;
+                    });
+
+                return [
+                    'id' => $trip->id,
+                    'region' => $trip->region,
+                    'title' => $trip->title,
+                    'start_date' => $trip->start_date,
+                    'duration_days' => $trip->duration_days,
+                    'confirmed_bookings' => $confirmedBookings,
+                    'pending_bookings' => $pendingBookings,
+                    'canceled_bookings' => $canceledBookings,
+                    'total_revenue' => $totalRevenue,
+                ];
+            });
+
+        return view('trips.index', [
+            'trips' => $trips
+        ]);
+    }
 }
