@@ -18,6 +18,7 @@ class Booking extends Model
         'email',
         'number_of_people',
         'status',
+        'token',
     ];
 
     public function trip()
