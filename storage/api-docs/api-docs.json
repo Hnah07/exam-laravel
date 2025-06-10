@@ -22,7 +22,8 @@
                                     "trip_id",
                                     "name",
                                     "email",
-                                    "number_of_people"
+                                    "number_of_people",
+                                    "token"
                                 ],
                                 "properties": {
                                     "trip_id": {
@@ -46,6 +47,11 @@
                                         "type": "integer",
                                         "minimum": 1,
                                         "example": 3
+                                    },
+                                    "token": {
+                                        "description": "MD5 hash of email + 'canadarocks'",
+                                        "type": "string",
+                                        "example": "2b615be78cf18a80066ec15d08663b17"
                                     }
                                 },
                                 "type": "object"
@@ -77,9 +83,50 @@
                                             "type": "integer",
                                             "example": 3
                                         },
+                                        "status": {
+                                            "type": "string",
+                                            "enum": [
+                                                "pending",
+                                                "confirmed",
+                                                "cancelled"
+                                            ],
+                                            "example": "pending"
+                                        },
                                         "token": {
                                             "type": "string",
                                             "example": "2b615be78cf18a80066ec15d08663b17"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - Token not provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The token field is required."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - Invalid token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid token"
                                         }
                                     },
                                     "type": "object"
@@ -200,7 +247,7 @@
     "tags": [
         {
             "name": "Bookings",
-            "description": "API Endpoints for managing bookings"
+            "description": "API Endpoint for adding bookings"
         },
         {
             "name": "Trips",
