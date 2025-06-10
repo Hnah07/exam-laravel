@@ -26,11 +26,11 @@ class TripController extends Controller
      *             @OA\Property(property="data", type="array",
      *                 @OA\Items(
      *                     @OA\Property(property="id", type="integer", example=1),
-     *                     @OA\Property(property="title", type="string", example="Summer Beach Vacation"),
-     *                     @OA\Property(property="region", type="string", example="Mediterranean"),
-     *                     @OA\Property(property="start_date", type="string", format="date", example="2024-07-01"),
-     *                     @OA\Property(property="duration_days", type="integer", example=7),
-     *                     @OA\Property(property="price_per_person", type="number", format="float", example=1299.99)
+     *                     @OA\Property(property="title", type="string", example="Off-Grid Camping in Jasper"),
+     *                     @OA\Property(property="region", type="string", example="west"),
+     *                     @OA\Property(property="start_date", type="string", format="date", example="2025-07-01"),
+     *                     @OA\Property(property="duration_days", type="integer", example=6),
+     *                     @OA\Property(property="price_per_person", type="number", format="float", example=1234.56)
      *                 )
      *             )
      *         )

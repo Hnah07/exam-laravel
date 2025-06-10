@@ -1,0 +1,73 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Trips API",
+        "description": "API for managing trips",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/trips": {
+            "get": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "Get all trips",
+                "operationId": "692b0f6b729af25639ef76046f8fba1f",
+                "responses": {
+                    "200": {
+                        "description": "List of trips",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Off-Grid Camping in Jasper"
+                                                    },
+                                                    "region": {
+                                                        "type": "string",
+                                                        "example": "west"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2025-07-01"
+                                                    },
+                                                    "duration_days": {
+                                                        "type": "integer",
+                                                        "example": 6
+                                                    },
+                                                    "price_per_person": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 1234.56
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Trips",
+            "description": "Trips"
+        }
+    ]
+}
